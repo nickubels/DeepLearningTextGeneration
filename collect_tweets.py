@@ -1,64 +1,88 @@
+import argparse
+import csv
 import json
 import os
 import re
 
 
-def clean_tweet(tweet):
-	tweet["text"] = tweet["text"].replace('&amp;', '&')
+def get_args():
+    parser = argparse.ArgumentParser(description='Obtain tweets from json files')
+    parser.add_argument('--data_path', '-d', metavar='STRING', default='./data',
+                        help="Where the json files containing tweets are stored")
+    parser.add_argument('--output_path', '-o', metavar='STRING', default='./output',
+                        help="Where the output will be stored")
 
-	tweet["text"] = re.sub("\n", "", tweet["text"]) # remove newline
-	# tweet["text"] = re.sub(r'^https?:\/\/.*[\r\n]*', '', tweet["text"], flags=re.MULTILINE)
-	# tweet["text"] = re.sub(r'https?:\/\/.*[\r\n]', '', tweet["text"], flags=re.MULTILINE) # remove urls
-	tweet["text"] = re.sub(r'http\S+', '', tweet["text"]) # remove urls
-	tweet["text"] = " ".join(tweet["text"].split()) # remove redundant white space
-	# tweet = re.sub(r'[_"\-;%()|.,+&=*%]', '', tweet)
-	# tweet = re.sub(r'\.', ' . ', tweet)
-	# tweet = re.sub(r'\!', ' !', tweet)
-	# tweet = re.sub(r'\?', ' ?', tweet)
-	# tweet = re.sub(r'\,', ' ,', tweet)
-	# tweet = re.sub(r':', ' : ', tweet)
-	# tweet = re.sub(r'#', ' # ', tweet)
-	# tweet = re.sub(r'@', ' @ ', tweet)
-	# tweet = re.sub(r'd .c .', 'd.c.', tweet)
-	# tweet = re.sub(r'u .s .', 'd.c.', tweet)
-	# tweet = re.sub(r' amp ', ' and ', tweet)
-	# tweet = re.sub(r'pm', ' pm ', tweet)
-	# tweet = re.sub(r'news', ' news ', tweet)
-	# tweet = re.sub(r' . . . ', ' ', tweet)
-	# tweet = re.sub(r' .  .  . ', ' ', tweet)
-	# tweet = re.sub(r' ! ! ', ' ! ', tweet)
-	# tweet = re.sub(r'&amp', 'and', tweet)
-	return tweet
+    return parser.parse_args()
 
 
-def collect_tweets(data_path):
-	"""
-	This function analyzes the stored json tweet data to create the long sample text
-	It opens each json file and adds the text of every tweet to a resulting string
-	and then returns that string.
-	This function is called by generate_text.py
-	"""
+class Tweets(object):
+    def __init__(self):
+        self.args = get_args()
 
-	json_files = os.listdir(data_path)
+    @staticmethod
+    def clean_tweet(tweet):
+        """
+        This function cleans the tweet from its emojjitions, urls and other redundant characters
+        :param tweet: the tweet that must be cleaned
+        :return: the cleaned tweet
+        """
+        # Remove emojis
+        tweet["text"] = re.compile('[\U00010000-\U0010ffff]', flags=re.UNICODE).sub(r'', tweet["text"])
 
-	all_tweets = []
+        # Replace &
+        tweet["text"] = tweet["text"].replace('&amp;', '&')
 
-	for json_file in json_files:
-		path = 'data/' + json_file
-		with open(path, 'r') as fp:
-			tweets = json.loads(fp.read())
-			for tweet in tweets:
-				if not tweet["is_retweet"]:
-					tweet = clean_tweet(tweet)
-					if len(tweet) > 0: # after removing url there should still be text
-						all_tweets.append(tweet["text"])
-		fp.close()
+        # Remove newline
+        tweet["text"] = re.sub("\n", "", tweet["text"])
 
-	return all_tweets
+        # Remove urls
+        tweet["text"] = re.sub(r'http\S+', '', tweet["text"])  # remove urls
+        # tweet["text"] = re.sub(r'^https?:\/\/.*[\r\n]*', '', tweet["text"], flags=re.MULTILINE)
+        # tweet["text"] = re.sub(r'https?:\/\/.*[\r\n]', '', tweet["text"], flags=re.MULTILINE) # remove urls
+
+        # Remove redundant white space
+        tweet["text"] = " ".join(tweet["text"].split())
+
+        return tweet
+
+    def collect_tweets(self):
+        """
+        This function loads all the tweets in the given directory, cleans them and exports the tweets as a csv file.
+        """
+        # Obtain all json files in directory
+        json_files = os.listdir(self.args.data_path)
+
+        all_tweets = []
+        # Obtain all tweets in each json file
+        for json_file in json_files:
+            with open(os.path.join(self.args.data_path, json_file), 'r') as fp:
+                tweets = json.loads(fp.read())
+                for tweet in tweets:
+                    # We don't want any retweets in the data set
+                    if not tweet["is_retweet"]:
+                        # Clean the tweet
+                        tweet = self.clean_tweet(tweet)
+                        # If the cleaned tweet contains any text, it should be added to the data set
+                        if len(tweet) > 0:
+                            all_tweets.append(tweet["text"])
+            fp.close()
+            break
+
+        # Check if the directory in which the csv file should be stored exists, if not create it
+        if not os.path.exists(self.args.output_path):
+            os.makedirs(self.args.output_path)
+
+        # Export tweets as a csv file
+        with open(os.path.join(self.args.output_path, 'tweets.csv'), 'w') as f:
+            writer = csv.writer(f, lineterminator='\n')
+            for tweet in all_tweets:
+                writer.writerow([tweet])
 
 
 def main():
-	data_path = './data'
-	tweets = collect_tweets(data_path)
+    tweets = Tweets()
+    tweets.collect_tweets()
 
-main()
+
+if __name__ == '__main__':
+    main()

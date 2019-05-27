@@ -55,6 +55,8 @@ class Tweets(object):
         all_tweets = []
         # Obtain all tweets in each json file
         for json_file in json_files:
+            if json_file[-4:] != 'json':
+                continue
             with open(os.path.join(self.args.data_path, json_file), 'r') as fp:
                 tweets = json.loads(fp.read())
                 for tweet in tweets:
@@ -66,7 +68,6 @@ class Tweets(object):
                         if len(tweet) > 0:
                             all_tweets.append(tweet["text"])
             fp.close()
-            break
 
         # Check if the directory in which the csv file should be stored exists, if not create it
         if not os.path.exists(self.args.output_path):

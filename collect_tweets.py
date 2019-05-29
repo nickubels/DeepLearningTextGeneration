@@ -10,7 +10,7 @@ def get_args():
     parser = argparse.ArgumentParser(description='Obtain tweets from json files')
     parser.add_argument('--data_path', '-d', metavar='STRING', default=os.path.join(os.path.curdir, 'data'),
                         help="Where the json files containing tweets are stored")
-    parser.add_argument('--output_path', '-o', metavar='STRING', default=os.path.join(os.path.curdir, 'output'),
+    parser.add_argument('--output_path', '-o', metavar='STRING', default=os.path.join(os.path.curdir, 'tweets'),
                         help="Where the output will be stored")
 
     return parser.parse_args()

@@ -1,4 +1,5 @@
 import argparse
+import codecs
 import csv
 import json
 import os
@@ -58,7 +59,14 @@ class Tweets(object):
             if json_file[-4:] != 'json':
                 continue
             with open(os.path.join(self.args.data_path, json_file), 'r') as fp:
-                tweets = json.loads(fp.read())
+                try:
+                    tweets = json.loads(fp.read())
+                except json.decoder.JSONDecodeError:
+                    # It should also be able to load json files with UTF-8 BOM header
+                    tweets = json.load(codecs.open(os.path.join(self.args.data_path, json_file), 'r', 'utf-8-sig'))
+                except:
+                    print('I skip this file: ', os.path.join(self.args.data_path, json_file))
+                    continue
                 for tweet in tweets:
                     # We don't want any retweets in the data set
                     if not tweet["is_retweet"]:

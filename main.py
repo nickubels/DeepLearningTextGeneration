@@ -1,5 +1,6 @@
 import argparse
 
+
 def get_args():
     parser = argparse.ArgumentParser(description='Script to generate Trump tweets')
     parser.add_argument('--data_path', '-d', metavar='STRING', default='./data',
@@ -8,6 +9,7 @@ def get_args():
                         help="Where the output will be stored")
 
     return parser.parse_args()
+
 
 class TextGeneration:
     def __init__(self):

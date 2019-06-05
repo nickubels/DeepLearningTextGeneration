@@ -84,6 +84,7 @@ class TextGeneration:
             self.trained = True
         self.model.fit(epochs, lr=1e-3, wd=1e-7)
 
+
     def generate(self, count=10, max_words=70):
         generated_tweets = []
         while len(generated_tweets) < count:
@@ -100,6 +101,7 @@ def main():
     generation = TextGeneration()
     generation.load_data()
     generation.train()
+    generation.model.save("trained_model",return_path=True)
     generated_tweets = generation.generate(5)
     print('\n'.join(generated_tweets))
 

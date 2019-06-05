@@ -1,26 +1,28 @@
 import argparse
 import logging
-import os
 import sys
-
-# Dit is ff copypasta
-import json
-import itertools
-import numpy as np
-import os
 import pandas as pd
-import random
-import torch
+import os
 
-from fastai.text import TextLMDataBunch, URLs
-from fastai.text import language_model_learner
 from sklearn.model_selection import train_test_split
-from torch import nn, optim
+from fastai.text import TextLMDataBunch, URLs, language_model_learner, csv, AWD_LSTM, load_learner, Path
 
-random.seed(2)
-# einde copypasta
+# import os
+#
+# # Dit is ff copypasta
+# import json
+# import itertools
+# import numpy as np
 
-from fastai.text import *
+# import random
+# import torch
+#
+# from torch import nn, optim
+#
+# # random.seed(2)
+# # einde copypasta
+# # from fastai.text import *
+
 
 logger = logging.getLogger()
 logging.basicConfig(
@@ -29,12 +31,22 @@ logging.basicConfig(
     level=logging.DEBUG,
     datefmt='%Y-%m-%d %H:%M:%S')
 
+
 def get_args():
     parser = argparse.ArgumentParser(description='Script to generate Trump tweets')
-    parser.add_argument('--data_path', '-d', metavar='STRING', default='./tweets',
-                        help="Where the CSV with the tweets is stored")
+    parser.add_argument('--data', '-d', metavar='STRING', default='./tweets/tweets.csv',
+                        help="The CSV with the tweets")
+    parser.add_argument('--train', '-t', metavar='BOOL', default=True,
+                        help="Do we need to train a model")
     parser.add_argument('--output_path', '-o', metavar='STRING', default='./output',
                         help="Where the output will be stored")
+    parser.add_argument('--use_pretrained', '-p', metavar='BOOL', default=True,
+                        help="If we use a pretrained model")
+    parser.add_argument('--model_path', '-mp', metavar='STRING',
+                        default=os.path.join(os.getcwd(), 'model/'),
+                        help="Where the model is or should be stored")
+    parser.add_argument('--model', '-m', metavar='STRING',
+                        default='finetune_trump.pkl', help="Which model to load, if any")
 
     return parser.parse_args()
 
@@ -43,19 +55,21 @@ class TextGeneration:
     def __init__(self):
         # Here we init stuff
         self.args = get_args()
-        # TODO: move to args
-        self.dropout = 0.5 
+        self.trained = False
+
+        self.dropout = 0.5
         self.epochs = 8
         self.batch_size = 32
 
-
-        self.trained = False
+        self.train_df = None
+        self.validation_df = None
+        self.model = None
+        self.data_lm = None
         logger.info(self.args)
-        print("Init")
 
     def load_data(self):
         logger.info("Start loading data")
-        with open(os.path.join(self.args.data_path,'tweets.csv'),'r') as file:
+        with open(self.args.data, 'r') as file:
             reader = csv.reader(file)
             data = []
             for row in reader:
@@ -76,8 +90,11 @@ class TextGeneration:
             text_cols='tweet',
             bs=batch_size
         )
+
         if not self.trained:
-            self.model = language_model_learner(self.data_lm, arch=AWD_LSTM, drop_mult=self.dropout)
+            logger.info("Using a pretrained_model to finetune: " + str(self.args.use_pretrained))
+            self.model = language_model_learner(self.data_lm, arch=AWD_LSTM,
+                                                pretrained=self.args.use_pretrained, drop_mult=self.dropout)
             self.model.fit_one_cycle(1, 1e-2)
             self.model.unfreeze()
             self.model.fit_one_cycle(1, 1e-3)
@@ -85,6 +102,7 @@ class TextGeneration:
         self.model.fit(epochs, lr=1e-3, wd=1e-7)
 
     def generate(self, count=10, max_words=70):
+        logger.info("Generating tweets")
         generated_tweets = []
         while len(generated_tweets) < count:
             raw_generated = self.model.predict("xxbos", n_words=max_words, temperature=0.8)
@@ -95,13 +113,22 @@ class TextGeneration:
                     generated_tweets.append(tweet)
         return generated_tweets
 
+    def run(self):
+        if self.args.train:
+            logger.info("Start training the model")
+            self.load_data()
+            self.train()
+            self.model.export(Path(os.path.join(self.args.model_path, self.args.model)))
+        else:
+            logger.info("Loading a pretrained model")
+            self.model = load_learner(Path(self.args.model_path), self.args.model)
+        generated_tweets = self.generate(5)
+        print('\n'.join(generated_tweets))
+
 
 def main():
     generation = TextGeneration()
-    generation.load_data()
-    generation.train()
-    generated_tweets = generation.generate(5)
-    print('\n'.join(generated_tweets))
+    generation.run()
 
 
 if __name__ == '__main__':

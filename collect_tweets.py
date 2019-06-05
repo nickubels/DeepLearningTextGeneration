@@ -4,6 +4,7 @@ import csv
 import json
 import os
 import re
+import nltk
 
 
 def get_args():
@@ -60,6 +61,7 @@ class Tweets(object):
                 continue
             with open(os.path.join(self.args.data_path, json_file), 'r') as fp:
                 try:
+                    print("load this file: ", os.path.join(self.args.data_path,json_file))
                     tweets = json.loads(fp.read())
                 except json.decoder.JSONDecodeError:
                     # It should also be able to load json files with UTF-8 BOM header
@@ -86,6 +88,7 @@ class Tweets(object):
             writer = csv.writer(f, lineterminator='\n')
             for tweet in all_tweets:
                 writer.writerow([tweet])
+                # writer.writerow([tweet.encode("utf-8")])
 
 
 def main():

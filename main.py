@@ -67,6 +67,9 @@ class TextGeneration:
         self.data_lm = None
         logger.info(self.args)
 
+        if not os.path.exists(self.args.root):
+            os.makedirs(self.args.root)
+
     def load_data(self):
         logger.info("Start loading data")
         with open(self.args.data, 'r') as file:

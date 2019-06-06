@@ -122,7 +122,11 @@ class TextGeneration:
         if self.args.train:
             logger.info("Start training the model")
             self.load_data()
-            self.train()
+            # self.train()
+
+            self.train(epochs=3, batch_size=32)
+            self.train(epochs=2, batch_size=64)
+            
             if self.args.job_id == "":
                 modelname = self.args.model
             else:

@@ -34,6 +34,7 @@ logging.basicConfig(
 
 def get_args():
     parser = argparse.ArgumentParser(description='Script to generate Trump tweets')
+    parser.add_argument('--job_id', '-j', metavar='STRING', default="", help="Job_id used for saving files")
     parser.add_argument('--data', '-d', metavar='STRING', default='./tweets/tweets.csv',
                         help="The CSV with the tweets")
     parser.add_argument('--train', '-t', metavar='BOOL', default=True,
@@ -122,6 +123,10 @@ class TextGeneration:
             logger.info("Start training the model")
             self.load_data()
             self.train()
+            if self.job_id == "":
+                modelname = self.args.model
+            else:
+                modelname = str(self.job_id)+".pkl"
             self.model.export(Path(os.path.join(self.args.model_path, self.args.model)))
         else:
             logger.info("Loading a pretrained model")

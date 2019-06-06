@@ -5,7 +5,7 @@
 #SBATCH --partition=gpu
 #SBATCH --gres=gpu:v100:1
 #SBATCH --job-name=MTGA
-#SBATCH --mem=2000
+#SBATCH --mem=10G
 #SBATCH --mail-type=BEGIN,END,FAIL
 #SBATCH --mail-user=n.s.ubels@student.rug.nl
 #SBATCH --output=logs/job-%j.log

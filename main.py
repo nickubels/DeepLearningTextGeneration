@@ -123,11 +123,11 @@ class TextGeneration:
             logger.info("Start training the model")
             self.load_data()
             self.train()
-            if self.job_id == "":
+            if self.args.job_id == "":
                 modelname = self.args.model
             else:
-                modelname = str(self.job_id)+".pkl"
-            self.model.export(Path(os.path.join(self.args.model_path, self.args.model)))
+                modelname = str(self.args.job_id)+".pkl"
+            self.model.export(Path(os.path.join(self.args.model_path, modelname)))
         else:
             logger.info("Loading a pretrained model")
             self.model = load_learner(Path(self.args.model_path), self.args.model)

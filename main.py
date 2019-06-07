@@ -37,8 +37,9 @@ def get_args():
     parser.add_argument('--job_id', '-j', metavar='STRING', default="", help="Job_id used for saving files")
     parser.add_argument('--data', '-d', metavar='STRING', default='./tweets/tweets.csv',
                         help="The CSV with the tweets")
-    parser.add_argument('--train', '-t', metavar='BOOL', default=True,
-                        help="Do we need to train a model")
+    parser.add_argument("--train", '-t', type=str2bool, nargs='?',
+                        const=True, default=True,
+                        help="Do we need to train a model?")
     parser.add_argument('--output_path', '-o', metavar='STRING', default='./output',
                         help="Where the output will be stored")
     parser.add_argument('--use_pretrained', '-p', metavar='BOOL', default=True,
@@ -50,6 +51,17 @@ def get_args():
                         default='finetune_trump.pkl', help="Which model to load, if any")
 
     return parser.parse_args()
+
+    # https://stackoverflow.com/questions/15008758/parsing-boolean-values-with-argparse
+    def str2bool(v):
+        if isinstance(v, bool):
+           return v
+        if v.lower() in ('yes', 'true', 't', 'y', '1'):
+            return True
+        elif v.lower() in ('no', 'false', 'f', 'n', '0'):
+            return False
+        else:
+            raise argparse.ArgumentTypeError('Boolean value expected.')
 
 
 class TextGeneration:

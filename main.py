@@ -4,7 +4,7 @@ import os
 import sys
 
 import pandas as pd
-from fastai.text import TextLMDataBunch, language_model_learner, csv, AWD_LSTM, load_learner, Path
+from fastai.text import TextLMDataBunch, URLs, language_model_learner, csv, AWD_LSTM, Transformer, load_learner, Path
 from sklearn.model_selection import train_test_split
 
 logger = logging.getLogger()
@@ -79,11 +79,17 @@ class TextGeneration:
                 if not row[0].startswith('"'):
                     data.append(row[0])
             logger.info('The number of tweets: {}'.format(len(data)))
+        # train_data, validation_data = train_test_split(
+        #     list(map(lambda x: x.lower(), data)),
+        #     test_size=0.05,
+        #     random_state=1
+        # )
         train_data, validation_data = train_test_split(
-            list(map(lambda x: x.lower(), data)),
+            list(data),
             test_size=0.05,
             random_state=1
         )
+
         self.train_df = pd.DataFrame({'tweet': train_data})
         self.validation_df = pd.DataFrame({'tweet': validation_data})
 

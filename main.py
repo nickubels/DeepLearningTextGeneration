@@ -5,7 +5,7 @@ import pandas as pd
 import os
 
 from sklearn.model_selection import train_test_split
-from fastai.text import TextLMDataBunch, URLs, language_model_learner, csv, AWD_LSTM, load_learner, Path
+from fastai.text import TextLMDataBunch, URLs, language_model_learner, csv, AWD_LSTM, Transformer, load_learner, Path
 
 # import os
 #
@@ -110,7 +110,7 @@ class TextGeneration:
 
         if not self.trained:
             logger.info("Using a pretrained_model to finetune: " + str(self.args.use_pretrained))
-            self.model = language_model_learner(self.data_lm, arch=AWD_LSTM,
+            self.model = language_model_learner(self.data_lm, arch=Transformer,
                                                 pretrained=self.args.use_pretrained, drop_mult=self.dropout)
             self.model.fit_one_cycle(1, 1e-2)
             self.model.unfreeze()

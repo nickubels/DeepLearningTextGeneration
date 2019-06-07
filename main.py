@@ -45,9 +45,9 @@ def get_args():
     parser.add_argument('--model', '-m', metavar='STRING',
                         default='finetune_trump.pkl', help="Which model to load, if any")
     parser.add_argument('--n_tweets', '-n', metavar='STRING',
-                        default='10', help="How many tweets to generate")
+                        default=10, help="How many tweets to generate")
     parser.add_argument('--n_words', '-w', metavar='STRING',
-                        default='70', help="How many words a tweet should contain")
+                        default=90, help="How many words a tweet should contain")
     return parser.parse_args()
 
 
@@ -151,7 +151,7 @@ class TextGeneration:
         else:
             logger.info("Loading a pretrained model")
             self.model = load_learner(Path(self.args.model_path), self.args.model)
-        generated_tweets = self.generate(self.args.n_tweets, self.args.n_words)
+        generated_tweets = self.generate(int(self.args.n_tweets), int(self.args.n_words))
         print('\n'.join(generated_tweets))
 
 

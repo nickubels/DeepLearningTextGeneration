@@ -30,7 +30,7 @@ def str2bool(v):
 def get_args():
     parser = argparse.ArgumentParser(description='Script to generate Trump tweets')
     parser.add_argument('--job_id', '-j', metavar='STRING', default="", help="Job_id used for saving files")
-    parser.add_argument('--data', '-d', metavar='STRING', default='./tweets/tweets.csv',
+    parser.add_argument('--data', '-d', metavar='STRING', default='./tweets/real_trump_2011.csv',
                         help="The CSV with the tweets")
     parser.add_argument("--train", '-t', type=str2bool, nargs='?',
                         const=True, default=True,
@@ -76,8 +76,9 @@ class TextGeneration:
             reader = csv.reader(file)
             data = []
             for row in reader:
-                if not row[0].startswith('"'):
-                    data.append(row[0])
+                if len(row[0]) > 1:
+                    if not (row[0].startswith('"') or ord(row[0][0]) == 820):
+                        data.append(row[0])
             logger.info('The number of tweets: {}'.format(len(data)))
         # train_data, validation_data = train_test_split(
         #     list(map(lambda x: x.lower(), data)),

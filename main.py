@@ -79,11 +79,18 @@ class TextGeneration:
                 if not row[0].startswith('"'):
                     data.append(row[0])
             logger.info('The number of tweets: ', len(data))
+        # train_data, validation_data = train_test_split(
+        #     list(map(lambda x: x.lower(), data)),
+        #     test_size=0.05,
+        #     random_state=1
+        # )
+
         train_data, validation_data = train_test_split(
-            list(map(lambda x: x.lower(), data)),
+            list(data),
             test_size=0.05,
             random_state=1
         )
+
         self.train_df = pd.DataFrame({'tweet': train_data})
         self.validation_df = pd.DataFrame({'tweet': validation_data})
 

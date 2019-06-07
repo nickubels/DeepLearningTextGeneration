@@ -148,7 +148,8 @@ class TextGeneration:
         else:
             logger.info("Loading a pretrained model")
             self.model = load_learner(Path(self.args.model_path), self.args.model)
-        generated_tweets = self.generate(5)
+        generated_tweets = self.generate(10)
+        print(generated_tweets)
         print('\n'.join(generated_tweets))
 
 

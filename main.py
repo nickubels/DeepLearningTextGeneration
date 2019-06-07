@@ -1,28 +1,11 @@
 import argparse
 import logging
-import sys
-import pandas as pd
 import os
+import sys
 
-from sklearn.model_selection import train_test_split
+import pandas as pd
 from fastai.text import TextLMDataBunch, URLs, language_model_learner, csv, AWD_LSTM, Transformer, load_learner, Path
-
-# import os
-#
-# # Dit is ff copypasta
-# import json
-# import itertools
-# import numpy as np
-
-# import random
-# import torch
-#
-# from torch import nn, optim
-#
-# # random.seed(2)
-# # einde copypasta
-# # from fastai.text import *
-
+from sklearn.model_selection import train_test_split
 
 logger = logging.getLogger()
 logging.basicConfig(
@@ -31,16 +14,18 @@ logging.basicConfig(
     level=logging.DEBUG,
     datefmt='%Y-%m-%d %H:%M:%S')
 
+
 # https://stackoverflow.com/questions/15008758/parsing-boolean-values-with-argparse
 def str2bool(v):
     if isinstance(v, bool):
-       return v
+        return v
     if v.lower() in ('yes', 'true', 't', 'y', '1'):
         return True
     elif v.lower() in ('no', 'false', 'f', 'n', '0'):
         return False
     else:
         raise argparse.ArgumentTypeError('Boolean value expected.')
+
 
 def get_args():
     parser = argparse.ArgumentParser(description='Script to generate Trump tweets')
@@ -59,10 +44,11 @@ def get_args():
                         help="Where the model is or should be stored")
     parser.add_argument('--model', '-m', metavar='STRING',
                         default='finetune_trump.pkl', help="Which model to load, if any")
-
+    parser.add_argument('--n_tweets', '-n', metavar='STRING',
+                        default=10, help="How many tweets to generate")
+    parser.add_argument('--n_words', '-w', metavar='STRING',
+                        default=90, help="How many words a tweet should contain")
     return parser.parse_args()
-
-    
 
 
 class TextGeneration:
@@ -90,7 +76,9 @@ class TextGeneration:
             reader = csv.reader(file)
             data = []
             for row in reader:
-                data.append(row[0])
+                if not row[0].startswith('"'):
+                    data.append(row[0])
+            logger.info('The number of tweets: ', len(data))
         train_data, validation_data = train_test_split(
             list(map(lambda x: x.lower(), data)),
             test_size=0.05,
@@ -118,8 +106,25 @@ class TextGeneration:
             self.trained = True
         self.model.fit(epochs, lr=1e-3, wd=1e-7)
 
+    def prettify_tweet(self, tweet):
+        # while tweet.find('xxrep') != -1:
+        #     rep_pos = tweet.find('xxrep')
+        #     try:
+        #         count = int(tweet[rep_pos + len('xxrep') + 1])
+        #         char_to_rep = tweet[rep_pos + len('xxrep ') + 2]
+        #         tweet = tweet[:rep_pos] + char_to_rep * count + tweet[rep_pos + len('xxrep ') + 3:]
+        #     except:
+        #         tweet = tweet.replace('xxrep', '')
 
-    def generate(self, count=10, max_words=70):
+        pre_positions = ['?', '!', ',', '.', '\'', '”', 'n\'t', '%', '$', ')', ':', '& ']
+        post_positions = ['$', '#', '“', '(']
+        for char in pre_positions:
+            tweet = tweet.replace(' ' + char, char)
+        for char in post_positions:
+            tweet = tweet.replace(' ' + char, char)
+        return tweet
+
+    def generate(self, count=10, max_words=280):
         logger.info("Generating tweets")
         generated_tweets = []
         while len(generated_tweets) < count:
@@ -127,7 +132,8 @@ class TextGeneration:
             raw_tweets = raw_generated.split("xxbos ")[1:]
             for tweet in raw_tweets:
                 tweet = tweet.replace('hyperlink', '')[:-1]
-                if tweet:
+                tweet = self.prettify_tweet(tweet)
+                if tweet and len(tweet) <= 280:
                     generated_tweets.append(tweet)
         return generated_tweets
 
@@ -135,20 +141,19 @@ class TextGeneration:
         if self.args.train:
             logger.info("Start training the model")
             self.load_data()
-            # self.train()
 
             self.train(epochs=3, batch_size=32)
             self.train(epochs=2, batch_size=64)
-            
+
             if self.args.job_id == "":
-                modelname = self.args.model
+                model_name = self.args.model
             else:
-                modelname = str(self.args.job_id)+".pkl"
-            self.model.export(Path(os.path.join(self.args.model_path, modelname)))
+                model_name = str(self.args.job_id) + ".pkl"
+            self.model.export(Path(os.path.join(self.args.model_path, model_name)))
         else:
             logger.info("Loading a pretrained model")
             self.model = load_learner(Path(self.args.model_path), self.args.model)
-        generated_tweets = self.generate(5)
+        generated_tweets = self.generate(int(self.args.n_tweets), int(self.args.n_words))
         print('\n'.join(generated_tweets))
 
 

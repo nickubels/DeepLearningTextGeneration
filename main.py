@@ -78,7 +78,7 @@ class TextGeneration:
             for row in reader:
                 if not row[0].startswith('"'):
                     data.append(row[0])
-            logger.info('The number of tweets: ', len(data))
+            logger.info('The number of tweets: {}'.format(len(data)))
         train_data, validation_data = train_test_split(
             list(map(lambda x: x.lower(), data)),
             test_size=0.05,

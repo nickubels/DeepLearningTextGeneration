@@ -76,7 +76,9 @@ class TextGeneration:
             reader = csv.reader(file)
             data = []
             for row in reader:
-                data.append(row[0])
+                if not row[0].startswith('"'):
+                    data.append(row[0])
+            logger.info('The number of tweets: ', len(data))
         train_data, validation_data = train_test_split(
             list(map(lambda x: x.lower(), data)),
             test_size=0.05,

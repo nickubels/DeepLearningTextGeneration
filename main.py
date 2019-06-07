@@ -105,7 +105,7 @@ class TextGeneration:
 
         if not self.trained:
             logger.info("Using a pretrained_model to finetune: " + str(self.args.use_pretrained))
-            self.model = language_model_learner(self.data_lm, arch=Transformer,
+            self.model = language_model_learner(self.data_lm, arch=AWD_LSTM,
                                                 pretrained=self.args.use_pretrained, drop_mult=self.dropout)
             self.model.fit_one_cycle(1, 1e-2)
             self.model.unfreeze()

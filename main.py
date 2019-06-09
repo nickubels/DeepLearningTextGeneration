@@ -137,7 +137,7 @@ class TextGeneration:
         while len(generated_tweets) < count:
             raw_generated = self.model.predict("xxbos", n_words=max_words, temperature=0.8)
             raw_tweets = raw_generated.split("xxbos ")[1:]
-            for tweet in raw_tweets[:-1]: # Skip last xxbos as it is 99% chance it is an incomplete tweet
+            for tweet in raw_tweets[:-1]:  # Skip last xxbos as it is 99% chance it is an incomplete tweet
                 tweet = self.prettify_tweet(tweet)
                 if tweet and len(tweet) <= 280:
                     generated_tweets.append(tweet)

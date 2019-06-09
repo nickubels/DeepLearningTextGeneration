@@ -127,7 +127,9 @@ class TextGeneration:
 
 
     def test(self):
-        print(self.model.validate(self.data_lm.test_dl))
+        test_metric = self.model.validate(self.data_lm.test_dl)
+        logger.info("Test loss: " + str(test_metric[0]))
+        logger.info("Test accuracy: " + str(test_metric[1]))
 
     def prettify_tweet(self, tweet):
         # while tweet.find('xxrep') != -1:

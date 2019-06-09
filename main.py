@@ -110,6 +110,7 @@ class TextGeneration:
             path = 'data',
             train_df = self.train_df,
             valid_df = self.validation_df,
+            test_df= self.test_df,
             text_cols='tweet',
             bs=batch_size
         )
@@ -123,6 +124,8 @@ class TextGeneration:
             self.model.fit_one_cycle(1, 1e-3)
             self.trained = True
         self.model.fit(epochs, lr=1e-3, wd=1e-7)
+
+        self.model.validate(self.data_lm.test_dl)
 
     def prettify_tweet(self, tweet):
         # while tweet.find('xxrep') != -1:

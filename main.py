@@ -63,6 +63,7 @@ class TextGeneration:
 
         self.train_df = None
         self.validation_df = None
+        self.test_df = None
         self.model = None
         self.data_lm = None
         logger.info(self.args)
@@ -107,10 +108,10 @@ class TextGeneration:
 
     def train(self, epochs=1, batch_size=32):
         self.data_lm = TextLMDataBunch.from_df(
-            path = 'data',
-            train_df = self.train_df,
-            valid_df = self.validation_df,
-            test_df= self.test_df,
+            path='data',
+            train_df=self.train_df,
+            valid_df=self.validation_df,
+            test_df=self.test_df,
             text_cols='tweet',
             bs=batch_size
         )
@@ -124,7 +125,6 @@ class TextGeneration:
             self.model.fit_one_cycle(1, 1e-3)
             self.trained = True
         self.model.fit(epochs, lr=1e-3, wd=1e-7)
-
 
     def test(self):
         test_metric = self.model.validate(self.data_lm.test_dl)

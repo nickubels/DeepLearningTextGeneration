@@ -125,6 +125,8 @@ class TextGeneration:
             self.trained = True
         self.model.fit(epochs, lr=1e-3, wd=1e-7)
 
+
+    def test(self):
         print(self.model.validate(self.data_lm.test_dl))
 
     def prettify_tweet(self, tweet):
@@ -160,11 +162,14 @@ class TextGeneration:
 
     def run(self):
         if self.args.train:
-            logger.info("Start training the model")
             self.load_data()
 
+            logger.info("Start training the model")
             self.train(epochs=3, batch_size=32)
             self.train(epochs=2, batch_size=64)
+
+            logger.info("Start testing")
+            self.test()
 
             if self.args.job_id == "":
                 model_name = self.args.model

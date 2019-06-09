@@ -15,8 +15,9 @@ logging.basicConfig(
     datefmt='%Y-%m-%d %H:%M:%S')
 
 
-# https://stackoverflow.com/questions/15008758/parsing-boolean-values-with-argparse
 def str2bool(v):
+    """Convert a string to a bool, this makes sure argument parsing goes right,
+     based on https://stackoverflow.com/questions/15008758/parsing-boolean-values-with-argparse"""
     if isinstance(v, bool):
         return v
     if v.lower() in ('yes', 'true', 't', 'y', '1'):
@@ -28,6 +29,7 @@ def str2bool(v):
 
 
 def get_args():
+    """Parse arguments"""
     parser = argparse.ArgumentParser(description='Script to generate Trump tweets')
     parser.add_argument('--job_id', '-j', metavar='STRING', default="", help="Job_id used for saving files")
     parser.add_argument('--data', '-d', metavar='STRING', default='./tweets/real_trump_2011.csv',
@@ -47,7 +49,7 @@ def get_args():
     parser.add_argument('--n_tweets', '-n', metavar='STRING',
                         default=10, help="How many tweets to generate")
     parser.add_argument('--n_words', '-w', metavar='STRING',
-                        default=90, help="How many words a tweet should contain")
+                        default=90, help="How many words should be generated at a time")
     return parser.parse_args()
 
 
@@ -67,10 +69,12 @@ class TextGeneration:
         self.data_lm = None
         logger.info(self.args)
 
+        # Make sure the path for saving the model exists
         if not os.path.exists(self.args.model_path):
             os.makedirs(self.args.model_path)
 
     def load_data(self):
+        """Load the data from file and append to list, split it and store into dataframes"""
         logger.info("Start loading data")
         with open(self.args.data, 'r') as file:
             reader = csv.reader(file)
@@ -80,11 +84,7 @@ class TextGeneration:
                     if not (row[0].startswith('"') or ord(row[0][0]) == 820):
                         data.append(row[0])
             logger.info('The number of tweets: {}'.format(len(data)))
-        # train_data, validation_data = train_test_split(
-        #     list(map(lambda x: x.lower(), data)),
-        #     test_size=0.05,
-        #     random_state=1
-        # )
+
         train_data, validation_data = train_test_split(
             list(data),
             test_size=0.05,
@@ -95,6 +95,7 @@ class TextGeneration:
         self.validation_df = pd.DataFrame({'tweet': validation_data})
 
     def train(self, epochs=1, batch_size=32):
+        """Train language model, uses two once cycle processes on first iteration"""
         self.data_lm = TextLMDataBunch.from_df(
             'data',
             self.train_df,
@@ -114,14 +115,7 @@ class TextGeneration:
         self.model.fit(epochs, lr=1e-3, wd=1e-7)
 
     def prettify_tweet(self, tweet):
-        # while tweet.find('xxrep') != -1:
-        #     rep_pos = tweet.find('xxrep')
-        #     try:
-        #         count = int(tweet[rep_pos + len('xxrep') + 1])
-        #         char_to_rep = tweet[rep_pos + len('xxrep ') + 2]
-        #         tweet = tweet[:rep_pos] + char_to_rep * count + tweet[rep_pos + len('xxrep ') + 3:]
-        #     except:
-        #         tweet = tweet.replace('xxrep', '')
+        """Prettifies tweet by removing spaces around some tokens, mostly interpunction"""
 
         pre_positions = ['?', '!', ',', '.', '\'', '”', 'n\'t', '%', '$', ')', ':', '& ']
         post_positions = ['$', '#', '“', '(']
@@ -132,6 +126,7 @@ class TextGeneration:
         return tweet
 
     def generate(self, count=10, max_words=280):
+        """Generates new tweets with the language model"""
         logger.info("Generating tweets")
         generated_tweets = []
         while len(generated_tweets) < count:
@@ -144,6 +139,7 @@ class TextGeneration:
         return generated_tweets
 
     def run(self):
+        """Main part of program, handles all the different steps"""
         if self.args.train:
             logger.info("Start training the model")
             self.load_data()

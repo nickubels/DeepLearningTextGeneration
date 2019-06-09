@@ -85,20 +85,31 @@ class TextGeneration:
         #     test_size=0.05,
         #     random_state=1
         # )
-        train_data, validation_data = train_test_split(
+        train_data, validation_test_data = train_test_split(
             list(data),
-            test_size=0.05,
+            test_size=0.1,
+            random_state=1
+        )
+
+        validation_data, test_data = train_test_split(
+            list(validation_test_data),
+            test_size=0.1,
             random_state=1
         )
 
         self.train_df = pd.DataFrame({'tweet': train_data})
         self.validation_df = pd.DataFrame({'tweet': validation_data})
+        self.test_df = pd.DataFrame({'tweet': test_data})
+
+        print(len(self.train_df))
+        print(len(self.validation_df))
+        print(len(self.test_df))
 
     def train(self, epochs=1, batch_size=32):
         self.data_lm = TextLMDataBunch.from_df(
-            'data',
-            self.train_df,
-            self.validation_df,
+            path = 'data',
+            train_df = self.train_df,
+            valid_df = self.validation_df,
             text_cols='tweet',
             bs=batch_size
         )

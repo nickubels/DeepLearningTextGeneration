@@ -74,7 +74,8 @@ class TextGeneration:
             os.makedirs(self.args.model_path)
 
     def load_data(self):
-        """Load the data from file and append to list, split it and store into dataframes"""
+        """Load the data from file and append to list,
+         split it and store into dataframes"""
         logger.info("Start loading data")
         with open(self.args.data, 'r') as file:
             reader = csv.reader(file)
@@ -95,7 +96,7 @@ class TextGeneration:
         self.validation_df = pd.DataFrame({'tweet': validation_data})
 
     def train(self, epochs=1, batch_size=32):
-        """Train language model, uses two once cycle processes on first iteration"""
+        """Train language model, uses two one cycle processes on first iteration"""
         self.data_lm = TextLMDataBunch.from_df(
             'data',
             self.train_df,

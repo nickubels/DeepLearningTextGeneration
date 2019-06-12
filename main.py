@@ -136,13 +136,14 @@ class TextGeneration:
     def prettify_tweet(self, tweet):
         """Prettifies tweet by removing spaces around some tokens, mostly interpunction"""
 
-        pre_positions = ['?', '!', ',', '.', '\'', '”', 'n\'t', '%', '$', ')', ':', '& ']
-        post_positions = ['$', '#', '“', '(']
-        for char in pre_positions:
+        no_leading_space = ['?', '!', ',', '.', '\'', '’', '”', 'n\'t', 'n’t', '%', ')', ':']
+        no_trailing_space = ['$', '#', '“', '(']
+        for char in no_leading_space:
             tweet = tweet.replace(' ' + char, char)
-        for char in post_positions:
-            tweet = tweet.replace(' ' + char, char)
+        for char in no_trailing_space:
+            tweet = tweet.replace(char + ' ', char)
         return tweet
+
 
     def generate(self, count=10, max_words=280):
         """Generates new tweets with the language model"""

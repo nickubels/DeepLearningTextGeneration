@@ -108,3 +108,5 @@ venv.bak/
 *.sublime-workspace
 *.pth
 *.pkl
+*.csv
+

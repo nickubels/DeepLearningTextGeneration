@@ -49,7 +49,7 @@ def get_args():
     parser.add_argument('--n_tweets', '-n', metavar='STRING',
                         default=10, help="How many tweets to generate")
     parser.add_argument('--n_words', '-w', metavar='STRING',
-                        default=90, help="How many words should be generated at a time")
+                        default=300, help="How many words should be generated at a time")
     return parser.parse_args()
 
 

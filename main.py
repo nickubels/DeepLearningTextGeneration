@@ -50,7 +50,7 @@ def get_args():
     parser.add_argument('--n_words', '-w', metavar='STRING',
                         default=300, help="How many words should be generated at a time")
     parser.add_argument('--architecture', '-a', metavar='STRING',
-                        default='Transformer', help='Which architecture do we want to use?')
+                        default='AWD_LSTM', help='Which architecture do we want to use?')
     return parser.parse_args()
 
 
@@ -172,8 +172,8 @@ class TextGeneration:
             self.load_data()
 
             logger.info("Start training the model")
-            self.train(epochs=3, batch_size=32)
-            self.train(epochs=2, batch_size=64)
+            # self.train(epochs=3, batch_size=32)
+            self.train(epochs=10, batch_size=64)
 
             logger.info("Start testing")
             self.test()

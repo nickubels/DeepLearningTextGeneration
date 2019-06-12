@@ -34,22 +34,23 @@ def get_args():
     parser.add_argument('--job_id', '-j', metavar='STRING', default="", help="Job_id used for saving files")
     parser.add_argument('--data', '-d', metavar='STRING', default='./tweets/real_trump_2011.csv',
                         help="The CSV with the tweets")
-    parser.add_argument("--train", '-t', type=str2bool, nargs='?',
-                        const=True, default=True,
+    parser.add_argument("--train", '-t', type=str2bool, nargs='?', const=True, default=True,
                         help="Do we need to train a model?")
     parser.add_argument('--output_path', '-o', metavar='STRING', default='./output',
                         help="Where the output will be stored")
     parser.add_argument('--use_pretrained', '-p', metavar='BOOL', default=True,
-                        help="If we use a pretrained model")
+                        help="Do we use a pretrained model?")
     parser.add_argument('--model_path', '-mp', metavar='STRING',
                         default=os.path.join(os.getcwd(), 'model/'),
                         help="Where the model is or should be stored")
-    parser.add_argument('--model', '-m', metavar='STRING',
+    parser.add_argument('--model_name', '-m', metavar='STRING',
                         default='finetune_trump.pkl', help="Which model to load, if any")
     parser.add_argument('--n_tweets', '-n', metavar='STRING',
                         default=10, help="How many tweets to generate")
     parser.add_argument('--n_words', '-w', metavar='STRING',
                         default=300, help="How many words should be generated at a time")
+    parser.add_argument('--architecture', '-a', metavar='STRING',
+                        default='Transformer', help='Which architecture do we want to use?')
     return parser.parse_args()
 
 
@@ -120,8 +121,12 @@ class TextGeneration:
 
         if not self.trained:
             logger.info("Using a pretrained_model to finetune: " + str(self.args.use_pretrained))
-            self.model = language_model_learner(self.data_lm, arch=AWD_LSTM,
-                                                pretrained=self.args.use_pretrained, drop_mult=self.dropout)
+            if self.args.architecture.lower() == 'awd_lstm':
+                self.model = language_model_learner(self.data_lm, arch=AWD_LSTM,
+                                                    pretrained=self.args.use_pretrained, drop_mult=self.dropout)
+            else:
+                self.model = language_model_learner(self.data_lm, arch=Transformer,
+                                                    pretrained=self.args.use_pretrained, drop_mult=self.dropout)
             self.model.fit_one_cycle(1, 1e-2)
             self.model.unfreeze()
             self.model.fit_one_cycle(1, 1e-3)
@@ -133,9 +138,9 @@ class TextGeneration:
         logger.info("Test loss: " + str(test_metric[0]))
         logger.info("Test accuracy: " + str(test_metric[1]))
 
-    def prettify_tweet(self, tweet):
+    @staticmethod
+    def prettify_tweet(tweet):
         """Prettifies tweet by removing spaces around some tokens, mostly interpunction"""
-
         no_leading_space = ['?', '!', ',', '.', '\'', '’', '”', 'n\'t', 'n’t', '%', ')', ':']
         no_trailing_space = ['$', '#', '“', '(']
         for char in no_leading_space:
@@ -143,7 +148,6 @@ class TextGeneration:
         for char in no_trailing_space:
             tweet = tweet.replace(char + ' ', char)
         return tweet
-
 
     def generate(self, count=10, max_words=280):
         """Generates new tweets with the language model"""

@@ -113,16 +113,8 @@ class TextGeneration:
             self.trained = True
         self.model.fit(epochs, lr=1e-3, wd=1e-7)
 
-    def prettify_tweet(self, tweet):
-        # while tweet.find('xxrep') != -1:
-        #     rep_pos = tweet.find('xxrep')
-        #     try:
-        #         count = int(tweet[rep_pos + len('xxrep') + 1])
-        #         char_to_rep = tweet[rep_pos + len('xxrep ') + 2]
-        #         tweet = tweet[:rep_pos] + char_to_rep * count + tweet[rep_pos + len('xxrep ') + 3:]
-        #     except:
-        #         tweet = tweet.replace('xxrep', '')
-
+    @staticmethod
+    def prettify_tweet(tweet):
         pre_positions = ['?', '!', ',', '.', '\'', '”', 'n\'t', '%', '$', ')', ':', '& ']
         post_positions = ['$', '#', '“', '(']
         for char in pre_positions:

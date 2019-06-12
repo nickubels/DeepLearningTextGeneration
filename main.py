@@ -179,13 +179,13 @@ class TextGeneration:
             self.test()
 
             if self.args.job_id == "":
-                model_name = self.args.model
+                model_name = self.args.model_path
             else:
                 model_name = str(self.args.job_id) + ".pkl"
             self.model.export(Path(os.path.join(self.args.model_path, model_name)))
         else:
             logger.info("Loading a pretrained model")
-            self.model = load_learner(Path(self.args.model_path), self.args.model)
+            self.model = load_learner(Path(self.args.model_path), self.args.model_name)
         generated_tweets = self.generate(int(self.args.n_tweets), int(self.args.n_words))
         for tweet in generated_tweets:
             print("Tweet:\n" + tweet)

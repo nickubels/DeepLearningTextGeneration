@@ -9,7 +9,7 @@
 #SBATCH --mail-type=FAIL,ARRAY_TASKS
 #SBATCH --mail-user=n.s.ubels@student.rug.nl
 #SBATCH --output=logs/%A_%a-%j.log
-#SBATCH --array
+#SBATCH --array=1-8%1
 
 INPUTFILE=input.in
 ARGS=$(cat $INPUTFILE | head -n $SLURM_ARRAY_TASK_ID | tail -n 1)

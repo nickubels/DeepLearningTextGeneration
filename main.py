@@ -51,6 +51,8 @@ def get_args():
                         default=300, help="How many words should be generated at a time")
     parser.add_argument('--architecture', '-a', metavar='STRING',
                         default='AWD_LSTM', help='Which architecture do we want to use?')
+    parser.add_argument('--epochs', '-e', metavar='INT',
+                        default=10, help='Amount of epochs in training')
     return parser.parse_args()
 
 
@@ -61,7 +63,7 @@ class TextGeneration:
         self.trained = False
 
         self.dropout = 0.5
-        self.epochs = 8
+        self.epochs = int(self.args.epochs)
         self.batch_size = 32
 
         self.train_df = None
@@ -173,7 +175,7 @@ class TextGeneration:
 
             logger.info("Start training the model")
             # self.train(epochs=3, batch_size=32)
-            self.train(epochs=10, batch_size=64)
+            self.train(epochs=self.epochs, batch_size=64)
 
             logger.info("Start testing")
             self.test()

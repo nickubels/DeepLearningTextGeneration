@@ -1,0 +1,8 @@
+--train True --use_pretrained True --architecture AWD_LSTM --epochs 10
+--train True --use_pretrained True --architecture AWD_LSTM --epochs 40
+--train True --use_pretrained False --architecture AWD_LSTM --epochs 10
+--train True --use_pretrained False --architecture AWD_LSTM --epochs 40
+--train True --use_pretrained True --architecture Transformer --epochs 10
+--train True --use_pretrained True --architecture Transformer --epochs 40
+--train True --use_pretrained False --architecture Transformer --epochs 10
+--train True --use_pretrained False --architecture Transformer --epochs 40

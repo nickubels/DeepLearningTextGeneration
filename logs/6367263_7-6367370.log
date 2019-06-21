@@ -1,0 +1,89 @@
+2019-06-20 23:52:53 INFO     Namespace(architecture='Transformer', data='./tweets/real_trump_2011.csv', epochs='10', job_id='6367370', model_name='finetune_trump.pkl', model_path='/home/s2912279/DeepLearningTextGeneration/model/', n_tweets=10, n_words=300, output_path='./output', train=True, use_pretrained='False')
+2019-06-20 23:52:53 INFO     Start loading data
+2019-06-20 23:52:53 INFO     The number of tweets: 24847
+22362
+2236
+249
+2019-06-20 23:52:53 INFO     Start training the model
+2019-06-20 23:52:56 INFO     Using a pretrained_model to finetune: False
+epoch     train_loss  valid_loss  accuracy  time    
+0         5.809061    5.393067    0.161815  00:33     
+epoch     train_loss  valid_loss  accuracy  time    
+0         5.144899    5.031186    0.205565  00:45     
+epoch     train_loss  valid_loss  accuracy  time    
+0         6.014882    5.934986    0.134464  00:45     
+1         6.001661    5.936082    0.134464  00:45     
+2         5.998716    5.932444    0.134464  00:45     
+3         5.992121    5.929154    0.134464  00:45     
+4         5.991148    5.928848    0.134464  00:45     
+5         5.994854    5.929292    0.134464  00:45     
+6         5.995409    5.927649    0.134464  00:45     
+7         5.988624    5.927683    0.134464  00:45     
+8         5.983091    5.925627    0.134464  00:45     
+9         6.228667    5.924307    0.134464  00:45     
+2019-06-21 00:02:02 INFO     Start testing
+2019-06-21 00:02:02 INFO     Test loss: 5.8898897
+2019-06-21 00:02:02 INFO     Test accuracy: tensor(0.1394)
+2019-06-21 00:02:03 INFO     Generating tweets
+Tweet:
+thanks There In Xxbos signature My 
+Tweet:
+Commissioner i before. is! from, better border have 
+Tweet:
+would 
+Tweet:
+. U.s. i the the, $Xxbos will Of 
+Tweet:
+no ca. Watching the. be was and!’s You James 
+Tweet:
+the Xxbos. The Big On more like Xxbos By the If A, Xxbos you 
+Tweet:
+as let’re much? THANKS cash%, by, to a! of 
+Tweet:
+to keep - of are the 
+Tweet:
+to. the! forward, Excited 
+Tweet:
+In) Never #. #
+Tweet:
+and Solves News 
+Tweet:
+To.' the!.. Were to IT We blow! Great a, The, The 
+
+
+###############################################################################
+Peregrine Cluster
+Job 6367370 for user 's2912279'
+Finished at: Fri Jun 21 00:02:09 CEST 2019
+
+Job details:
+============
+
+Name                : MTGA
+User                : s2912279
+Partition           : gpu
+Nodes               : pg-gpu12
+Cores               : 12
+State               : COMPLETED
+Submit              : 2019-06-20T22:38:25
+Start               : 2019-06-20T23:52:42
+End                 : 2019-06-21T00:02:08
+Reserved walltime   : 01:00:00
+Used walltime       : 00:09:26
+Used CPU time       : 00:09:50 (efficiency:  8.69%)
+% User (Computation): 62.25%
+% System (I/O)      : 37.75%
+Mem reserved        : 10G/node
+Max Mem used        : 2.58G (pg-gpu12)
+Max Disk Write      : 61.44K (pg-gpu12)
+Max Disk Read       : 3.19M (pg-gpu12)
+
+
+Acknowledgements:
+=================
+
+Please see this page if you want to acknowledge Peregrine in your publications:
+
+https://redmine.hpc.rug.nl/redmine/projects/peregrine/wiki/ScientificOutput
+
+################################################################################

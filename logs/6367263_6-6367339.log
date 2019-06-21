@@ -1,0 +1,117 @@
+2019-06-20 23:20:31 INFO     Namespace(architecture='Transformer', data='./tweets/real_trump_2011.csv', epochs='40', job_id='6367339', model_name='finetune_trump.pkl', model_path='/home/s2912279/DeepLearningTextGeneration/model/', n_tweets=10, n_words=300, output_path='./output', train=True, use_pretrained='True')
+2019-06-20 23:20:31 INFO     Start loading data
+2019-06-20 23:20:31 INFO     The number of tweets: 24847
+22362
+2236
+249
+2019-06-20 23:20:31 INFO     Start training the model
+2019-06-20 23:20:35 INFO     Using a pretrained_model to finetune: True
+epoch     train_loss  valid_loss  accuracy  time    
+0         5.767719    5.349516    0.166220  00:33     
+epoch     train_loss  valid_loss  accuracy  time    
+0         4.583366    4.390604    0.267842  00:45     
+epoch     train_loss  valid_loss  accuracy  time    
+0         4.209367    4.097493    0.291830  00:45     
+1         5.805420    5.933648    0.134464  00:45     
+2         5.987592    5.930424    0.134464  00:45     
+3         5.994164    5.930379    0.134464  00:45     
+4         5.996811    5.928817    0.134464  00:45     
+5         5.986136    5.926571    0.134464  00:45     
+6         5.989500    5.927337    0.134464  00:45     
+7         5.987280    5.927732    0.134464  00:45     
+8         5.991034    5.926458    0.134464  00:45     
+9         6.025394    5.925997    0.134464  00:45     
+10        5.991025    5.927775    0.134464  00:45     
+11        5.991031    5.925607    0.134464  00:45     
+12        5.987216    5.924014    0.134464  00:45     
+13        5.986157    5.926970    0.134464  00:45     
+14        5.987471    5.924837    0.134464  00:45     
+15        5.985499    5.924456    0.134464  00:45     
+16        5.983569    5.925469    0.134464  00:45     
+17        5.986269    5.925172    0.134464  00:45     
+18        5.986297    5.922666    0.134464  00:45     
+19        5.984108    5.923037    0.134464  00:45     
+20        5.983386    5.924236    0.134464  00:45     
+21        5.982139    5.923554    0.134464  00:45     
+22        5.988161    5.924288    0.134464  00:45     
+23        5.981554    5.923810    0.134464  00:45     
+24        5.983940    5.923814    0.134464  00:45     
+25        5.978794    5.922466    0.134464  00:45     
+26        5.982140    5.923319    0.134464  00:45     
+27        5.987440    5.924910    0.134464  00:45     
+28        5.982511    5.924128    0.134464  00:45     
+29        5.980226    5.923582    0.134464  00:45     
+30        5.983289    5.922967    0.134464  00:45     
+31        5.980212    5.923548    0.134464  00:45     
+32        5.983191    5.922831    0.134464  00:45     
+33        5.979232    5.923220    0.134464  00:45     
+34        5.982898    5.922370    0.134464  00:45     
+35        5.982575    5.923877    0.134464  00:45     
+36        5.984189    5.926429    0.134464  00:45     
+37        5.975237    5.922609    0.134464  00:45     
+38        5.978226    5.923605    0.134464  00:45     
+39        5.978778    5.923188    0.134464  00:45     
+2019-06-20 23:52:34 INFO     Start testing
+2019-06-20 23:52:34 INFO     Test loss: 5.8896656
+2019-06-20 23:52:34 INFO     Test accuracy: tensor(0.1394)
+2019-06-20 23:52:36 INFO     Generating tweets
+Tweet:
+guide Xxbos and. credit is and: only have To For he america 
+Tweet:
+. dollars anti In with have, #" 
+Tweet:
+On And is It have 
+Tweet:
+!, Thank the! A! election and disease it … You And am! False You! made! Empty As Am, for The Xxbos use them failing @oreillyfactor in, I i I so i Worst? soon Xxbos terrible Risks to Is. Security,, taxes Client 
+Tweet:
+many in. Interview. " thinking very all of President And settle 
+Tweet:
+the 
+Tweet:
+their At landmark) crooked Of 
+Tweet:
+-- The A to 
+Tweet:
+, Xxbos tonight of a at! to.. the what Made and Why It parts, on., is Great a. fighting! that @newsmax_media It 
+Tweet:
+. Let. Done 
+Tweet:
+” people a The and.’s, the on final At. i and! Wonderful don, Great - civilized i president Xxbos the of 
+
+
+###############################################################################
+Peregrine Cluster
+Job 6367339 for user 's2912279'
+Finished at: Thu Jun 20 23:52:42 CEST 2019
+
+Job details:
+============
+
+Name                : MTGA
+User                : s2912279
+Partition           : gpu
+Nodes               : pg-gpu12
+Cores               : 12
+State               : COMPLETED
+Submit              : 2019-06-20T22:38:25
+Start               : 2019-06-20T23:20:21
+End                 : 2019-06-20T23:52:42
+Reserved walltime   : 01:00:00
+Used walltime       : 00:32:21
+Used CPU time       : 00:32:44 (efficiency:  8.44%)
+% User (Computation): 60.59%
+% System (I/O)      : 39.41%
+Mem reserved        : 10G/node
+Max Mem used        : 2.58G (pg-gpu12)
+Max Disk Write      : 61.44K (pg-gpu12)
+Max Disk Read       : 3.19M (pg-gpu12)
+
+
+Acknowledgements:
+=================
+
+Please see this page if you want to acknowledge Peregrine in your publications:
+
+https://redmine.hpc.rug.nl/redmine/projects/peregrine/wiki/ScientificOutput
+
+################################################################################

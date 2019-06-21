@@ -1,0 +1,121 @@
+2019-06-20 22:58:39 INFO     Namespace(architecture='AWD_LSTM', data='./tweets/real_trump_2011.csv', epochs='40', job_id='6367301', model_name='finetune_trump.pkl', model_path='/home/s2912279/DeepLearningTextGeneration/model/', n_tweets=10, n_words=300, output_path='./output', train=True, use_pretrained='False')
+2019-06-20 22:58:39 INFO     Start loading data
+2019-06-20 22:58:39 INFO     The number of tweets: 24847
+22362
+2236
+249
+2019-06-20 22:58:39 INFO     Start training the model
+2019-06-20 22:58:43 INFO     Using a pretrained_model to finetune: False
+epoch     train_loss  valid_loss  accuracy  time    
+0         4.293867    3.860549    0.307693  00:14     
+epoch     train_loss  valid_loss  accuracy  time    
+0         3.767323    3.605109    0.338616  00:17     
+epoch     train_loss  valid_loss  accuracy  time    
+0         3.550834    3.460491    0.354583  00:17     
+1         3.379101    3.380832    0.363690  00:17     
+2         3.220393    3.326889    0.370655  00:17     
+3         3.094613    3.294120    0.374777  00:16     
+4         2.965641    3.275466    0.378408  00:17     
+5         2.848288    3.264237    0.378839  00:17     
+6         2.739382    3.264299    0.380104  00:17     
+7         2.655428    3.265289    0.380506  00:17     
+8         2.558912    3.281065    0.381696  00:17     
+9         2.472309    3.289078    0.381682  00:17     
+10        2.387713    3.308811    0.380298  00:16     
+11        2.322942    3.317983    0.381280  00:17     
+12        2.235803    3.337817    0.380744  00:17     
+13        2.164382    3.353868    0.379598  00:17     
+14        2.108177    3.378938    0.378839  00:17     
+15        2.036762    3.400205    0.376920  00:17     
+16        1.981084    3.423729    0.375893  00:17     
+17        1.913739    3.450554    0.375536  00:16     
+18        1.876434    3.465489    0.377440  00:17     
+19        1.803649    3.499821    0.374241  00:17     
+20        1.765702    3.520245    0.375595  00:17     
+21        1.709123    3.544062    0.373824  00:17     
+22        1.660008    3.567649    0.373988  00:17     
+23        1.600781    3.594819    0.372753  00:17     
+24        1.571330    3.618575    0.371830  00:16     
+25        1.524494    3.641426    0.371518  00:17     
+26        1.497415    3.686697    0.370223  00:17     
+27        1.450721    3.693153    0.368914  00:17     
+28        1.418450    3.721023    0.368393  00:17     
+29        1.377172    3.727951    0.370060  00:17     
+30        1.356159    3.766975    0.369196  00:17     
+31        1.315667    3.784015    0.368170  00:16     
+32        1.293467    3.801920    0.366503  00:17     
+33        1.256734    3.818534    0.367039  00:17     
+34        1.240890    3.840943    0.367634  00:17     
+35        1.198968    3.867499    0.365908  00:17     
+36        1.181057    3.883324    0.365759  00:17     
+37        1.165715    3.911013    0.364583  00:17     
+38        1.155731    3.920872    0.365253  00:16     
+39        1.124839    3.929684    0.365491  00:17     
+2019-06-20 23:10:42 INFO     Start testing
+2019-06-20 23:10:42 INFO     Test loss: 3.8736627
+2019-06-20 23:10:42 INFO     Test accuracy: tensor(0.3698)
+2019-06-20 23:10:42 INFO     Generating tweets
+Tweet:
+Just returned from Trump Doral in Miami. Amazing construction. The hotel is amazing - the best anywhere! 
+Tweet:
+i just heard that my friend Derek Jeter broke his mind off the @buffalobills. He’s a great player and leader. 
+Tweet:
+What did you think of my decision? #celebapprentice 
+Tweet:
+My deepest sympathies to the families and friends of those involved in the terrible boat accident which just took place in Missouri. Such a tragedy, such a great loss. May God be with you all! 
+Tweet:
+We will now take a bold step toward securing our national security. We must repeal obamacare. Together, we are going to MAKE AMERICA SAFE & GREAT AGAIN! 
+Tweet:
+There is no better place in the world to spend Christmas than Mar - a - Lago in Palm Beach, Florida. 
+Tweet:
+With some of the worst political & media outlets in the country, Republicans have zero credibility! 
+Tweet:
+Some people do not think i ever get along - most other candidates are VERY ANGRY at what i said. They know i am right, and i don’t think so. In other words, fools! 
+Tweet:
+The American people deserve a healthcare system that takes care of them – not one that takes advantage of them. We will protect them, & we will protect them. Their VOTE is a vote for Nancy Pelosi, Debbie Wasserman Schultz, and many other great people! 
+Tweet:
+Congratulations to Bill Schuette. You will like him and the team for playing so well! Bill is a great guy and the chief negotiator of our Country! 
+Tweet:
+With all of the Fake News Sunday Political Shows on NBC and Syria, Obama’s job is in disarray. Enjoy! 
+Tweet:
+Great poll- thank you! We are all proud of you! #makeamericagreatagain #Trump2016 
+Tweet:
+My thoughts and prayers are with the victims and families of those affected by two powerful massacre in Italy and Spain. God Bless them all. 
+
+
+###############################################################################
+Peregrine Cluster
+Job 6367301 for user 's2912279'
+Finished at: Thu Jun 20 23:10:49 CEST 2019
+
+Job details:
+============
+
+Name                : MTGA
+User                : s2912279
+Partition           : gpu
+Nodes               : pg-gpu12
+Cores               : 12
+State               : COMPLETED
+Submit              : 2019-06-20T22:38:25
+Start               : 2019-06-20T22:58:29
+End                 : 2019-06-20T23:10:48
+Reserved walltime   : 01:00:00
+Used walltime       : 00:12:19
+Used CPU time       : 00:12:45 (efficiency:  8.64%)
+% User (Computation): 63.49%
+% System (I/O)      : 36.51%
+Mem reserved        : 10G/node
+Max Mem used        : 2.64G (pg-gpu12)
+Max Disk Write      : 61.44K (pg-gpu12)
+Max Disk Read       : 3.19M (pg-gpu12)
+
+
+Acknowledgements:
+=================
+
+Please see this page if you want to acknowledge Peregrine in your publications:
+
+https://redmine.hpc.rug.nl/redmine/projects/peregrine/wiki/ScientificOutput
+
+################################################################################

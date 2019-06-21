@@ -1,0 +1,89 @@
+2019-06-20 23:10:59 INFO     Namespace(architecture='Transformer', data='./tweets/real_trump_2011.csv', epochs='10', job_id='6367323', model_name='finetune_trump.pkl', model_path='/home/s2912279/DeepLearningTextGeneration/model/', n_tweets=10, n_words=300, output_path='./output', train=True, use_pretrained='True')
+2019-06-20 23:10:59 INFO     Start loading data
+2019-06-20 23:10:59 INFO     The number of tweets: 24847
+22362
+2236
+249
+2019-06-20 23:10:59 INFO     Start training the model
+2019-06-20 23:11:03 INFO     Using a pretrained_model to finetune: True
+epoch     train_loss  valid_loss  accuracy  time    
+0         5.708511    5.288888    0.170848  00:34     
+epoch     train_loss  valid_loss  accuracy  time    
+0         4.556061    4.366780    0.271265  00:45     
+epoch     train_loss  valid_loss  accuracy  time    
+0         4.172373    4.114553    0.291161  00:45     
+1         5.272544    5.942071    0.134464  00:45     
+2         5.959095    5.933336    0.134464  00:45     
+3         5.990449    5.932276    0.134464  00:45     
+4         5.991423    5.928748    0.134464  00:45     
+5         5.990255    5.928261    0.134464  00:45     
+6         5.991393    5.928920    0.134464  00:45     
+7         5.991418    5.926319    0.134464  00:45     
+8         5.986925    5.926447    0.134464  00:45     
+9         5.990244    5.925216    0.134464  00:45     
+2019-06-20 23:20:13 INFO     Start testing
+2019-06-20 23:20:13 INFO     Test loss: 5.8901405
+2019-06-20 23:20:13 INFO     Test accuracy: tensor(0.1394)
+2019-06-20 23:20:15 INFO     Generating tweets
+Tweet:
+,. 
+Tweet:
+Thr process a Endorsed at Will - the 
+Tweet:
+N’t. to in Great he Of! My to. Ways of. The has put what in, the will Of.. of ",! all job " Not And troops! 
+Tweet:
+and Our end him the The people of The,! never With.? despite The! Be. should have The not we. to That debate to On, 
+Tweet:
+the of” called.,” and Is on he The. Have like 
+Tweet:
+Step., - JUST he Hard you!, The trump false negative Then i dr.! I 
+Tweet:
+with - step 
+Tweet:
+#As views 
+Tweet:
+The and debt! 
+Tweet:
+It, in And Xxbos, ratings made.. Of in not you 
+Tweet:
+The will a with 18! HAS 2012 stupid 
+Tweet:
+! the, the Well " You and,. For was., 
+
+
+###############################################################################
+Peregrine Cluster
+Job 6367323 for user 's2912279'
+Finished at: Thu Jun 20 23:20:20 CEST 2019
+
+Job details:
+============
+
+Name                : MTGA
+User                : s2912279
+Partition           : gpu
+Nodes               : pg-gpu12
+Cores               : 12
+State               : COMPLETED
+Submit              : 2019-06-20T22:38:25
+Start               : 2019-06-20T23:10:49
+End                 : 2019-06-20T23:20:20
+Reserved walltime   : 01:00:00
+Used walltime       : 00:09:31
+Used CPU time       : 00:09:49 (efficiency:  8.61%)
+% User (Computation): 61.05%
+% System (I/O)      : 38.95%
+Mem reserved        : 10G/node
+Max Mem used        : 2.58G (pg-gpu12)
+Max Disk Write      : 61.44K (pg-gpu12)
+Max Disk Read       : 3.19M (pg-gpu12)
+
+
+Acknowledgements:
+=================
+
+Please see this page if you want to acknowledge Peregrine in your publications:
+
+https://redmine.hpc.rug.nl/redmine/projects/peregrine/wiki/ScientificOutput
+
+################################################################################

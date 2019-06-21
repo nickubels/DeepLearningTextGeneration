@@ -1,0 +1,95 @@
+2019-06-20 22:38:37 INFO     Namespace(architecture='AWD_LSTM', data='./tweets/real_trump_2011.csv', epochs='10', job_id='6367264', model_name='finetune_trump.pkl', model_path='/home/s2912279/DeepLearningTextGeneration/model/', n_tweets=10, n_words=300, output_path='./output', train=True, use_pretrained='True')
+2019-06-20 22:38:37 INFO     Start loading data
+2019-06-20 22:38:37 INFO     The number of tweets: 24847
+22362
+2236
+249
+2019-06-20 22:38:37 INFO     Start training the model
+2019-06-20 22:38:44 INFO     Using a pretrained_model to finetune: True
+epoch     train_loss  valid_loss  accuracy  time    
+0         4.294926    3.865108    0.308304  00:15     
+epoch     train_loss  valid_loss  accuracy  time    
+0         3.767087    3.607074    0.340313  00:17     
+epoch     train_loss  valid_loss  accuracy  time    
+0         3.551307    3.465253    0.354747  00:17     
+1         3.382858    3.380216    0.364568  00:17     
+2         3.224457    3.330613    0.370670  00:17     
+3         3.096739    3.297288    0.375640  00:16     
+4         2.967891    3.278594    0.377202  00:17     
+5         2.857496    3.264040    0.378646  00:17     
+6         2.759077    3.269007    0.378869  00:17     
+7         2.644719    3.269572    0.381414  00:17     
+8         2.562062    3.272016    0.381399  00:17     
+9         2.475116    3.286799    0.382664  00:17     
+2019-06-20 22:42:17 INFO     Start testing
+2019-06-20 22:42:17 INFO     Test loss: 3.2534966
+2019-06-20 22:42:20 INFO     Test accuracy: tensor(0.3834)
+2019-06-20 22:42:20 INFO     Generating tweets
+Tweet:
+Mexico is now buying U.S. oil from Mexico. We need Border Security, DRUGS, Human Trafficking, Drugs and Human Trafficking. Gas prices will rise at record pace. 
+Tweet:
+“Donald Trump: He Stole America' In Obama’” via @breitbartnews 
+Tweet:
+Will be in Ohio for a speech tonight - Karen o will be forgotten. 
+Tweet:
+Today, we signed the #hanukkah to remember the men and women who serve in Normandy the nomination of Commander - in - Chief. We are proud of you, and every day for the words: … 
+Tweet:
+i will be on @oreillyfactor tonight at 10 pm. Enjoy! 
+Tweet:
+Remember that President Obama just told me " i don't need President Donald J. Trump in North Korea. He has never met him. i like him! " 
+Tweet:
+As we have no longer allowed our leaders to spy on our embassies and our great leaders. We must act fast! 
+Tweet:
+We are the biggest we have seen in our history, and we were so lucky. We must then let the world know that we’re in a better place, not tough! 
+Tweet:
+Many brave young Americans are now proving that there is no excuse for the Mueller Report on Crooked Hillary Clinton. i knew they would still have a THEY WITCH job 
+Tweet:
+In Chicago on Doctor Ben Wright's death, we are thrilled to see you at Trump Tower! 
+Tweet:
+MAKE AMERICA GREAT AGAIN! 
+Tweet:
+Thank you Atlanta, Georgia! #makeamericagreatagain #Trump2016 
+Tweet:
+Great news for the Republican Party, MAKE AMERICA GREAT AGAIN! 
+Tweet:
+We will build a Wall with Mexico and Canada and will create much bigger Wall. When you get into the U.S., we will build the Wall. The Wall will be built under the terms of DACA. The WALL will be fully renovated. 
+Tweet:
+Thank you Louisiana! #makeamericagreatagain 
+
+
+###############################################################################
+Peregrine Cluster
+Job 6367264 for user 's2912279'
+Finished at: Thu Jun 20 22:42:25 CEST 2019
+
+Job details:
+============
+
+Name                : MTGA
+User                : s2912279
+Partition           : gpu
+Nodes               : pg-gpu12
+Cores               : 12
+State               : COMPLETED
+Submit              : 2019-06-20T22:38:25
+Start               : 2019-06-20T22:38:26
+End                 : 2019-06-20T22:42:25
+Reserved walltime   : 01:00:00
+Used walltime       : 00:03:59
+Used CPU time       : 00:04:14 (efficiency:  8.89%)
+% User (Computation): 66.21%
+% System (I/O)      : 33.79%
+Mem reserved        : 10G/node
+Max Mem used        : 2.64G (pg-gpu12)
+Max Disk Write      : 61.44K (pg-gpu12)
+Max Disk Read       : 3.19M (pg-gpu12)
+
+
+Acknowledgements:
+=================
+
+Please see this page if you want to acknowledge Peregrine in your publications:
+
+https://redmine.hpc.rug.nl/redmine/projects/peregrine/wiki/ScientificOutput
+
+################################################################################

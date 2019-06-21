@@ -1,0 +1,121 @@
+2019-06-20 22:42:36 INFO     Namespace(architecture='AWD_LSTM', data='./tweets/real_trump_2011.csv', epochs='40', job_id='6367270', model_name='finetune_trump.pkl', model_path='/home/s2912279/DeepLearningTextGeneration/model/', n_tweets=10, n_words=300, output_path='./output', train=True, use_pretrained='True')
+2019-06-20 22:42:36 INFO     Start loading data
+2019-06-20 22:42:36 INFO     The number of tweets: 24847
+22362
+2236
+249
+2019-06-20 22:42:36 INFO     Start training the model
+2019-06-20 22:42:40 INFO     Using a pretrained_model to finetune: True
+epoch     train_loss  valid_loss  accuracy  time    
+0         4.298247    3.862696    0.307485  00:14     
+epoch     train_loss  valid_loss  accuracy  time    
+0         3.766556    3.605225    0.338839  00:17     
+epoch     train_loss  valid_loss  accuracy  time    
+0         3.560652    3.459903    0.354866  00:17     
+1         3.385130    3.380853    0.364167  00:17     
+2         3.228219    3.333701    0.368036  00:17     
+3         3.099970    3.295653    0.374330  00:16     
+4         2.985014    3.275065    0.376518  00:17     
+5         2.861110    3.267069    0.377813  00:17     
+6         2.757273    3.263066    0.380565  00:17     
+7         2.648478    3.269143    0.379762  00:17     
+8         2.567229    3.274999    0.380030  00:17     
+9         2.478851    3.284897    0.380818  00:17     
+10        2.394594    3.301298    0.379345  00:16     
+11        2.313363    3.315213    0.381369  00:17     
+12        2.236319    3.341674    0.379003  00:17     
+13        2.166673    3.354681    0.379539  00:17     
+14        2.110786    3.372385    0.379196  00:17     
+15        2.042616    3.412767    0.376830  00:17     
+16        1.989202    3.429389    0.377574  00:17     
+17        1.908561    3.441199    0.376801  00:16     
+18        1.863254    3.471192    0.374851  00:17     
+19        1.801469    3.497293    0.375372  00:17     
+20        1.752212    3.514589    0.374479  00:17     
+21        1.722161    3.531427    0.372857  00:17     
+22        1.650492    3.576958    0.371830  00:17     
+23        1.615880    3.583648    0.372991  00:17     
+24        1.568495    3.609481    0.370655  00:16     
+25        1.530285    3.630367    0.370789  00:17     
+26        1.490543    3.671112    0.369271  00:17     
+27        1.454567    3.692130    0.369196  00:17     
+28        1.413912    3.713013    0.369435  00:17     
+29        1.377859    3.730660    0.368601  00:17     
+30        1.355946    3.745038    0.369107  00:17     
+31        1.320756    3.773530    0.367604  00:16     
+32        1.293274    3.794669    0.367158  00:17     
+33        1.271336    3.807849    0.368304  00:17     
+34        1.226674    3.840612    0.368170  00:17     
+35        1.203697    3.864472    0.367054  00:17     
+36        1.193255    3.867651    0.368437  00:17     
+37        1.152915    3.900812    0.366518  00:17     
+38        1.126291    3.909252    0.366607  00:16     
+39        1.106772    3.932580    0.366652  00:17     
+2019-06-20 22:54:38 INFO     Start testing
+2019-06-20 22:54:39 INFO     Test loss: 3.8803613
+2019-06-20 22:54:39 INFO     Test accuracy: tensor(0.3644)
+2019-06-20 22:54:39 INFO     Generating tweets
+Tweet:
+The failed Fast Train project in California, where the cost overruns are becoming world record setting, is hundreds of times more expensive than the desperately needed Wall! 
+Tweet:
+Facebook is now complaining that my State of the Union speech was WRONG. That is not fair. Just as i have been saying, it is not possible! Just watch. 
+Tweet:
+Congratulations to Mike Braun on his big GOP win over a strong Congressman representing his own country in Texas. He will be a tremendous Senator. He is strong on Borders & our Second Amendment. Loves our Military & our Vets. He will be a great Senator! 
+Tweet:
+Just arrived in Italy for a speech at #APEC2017 
+Tweet:
+i have been watching very little CNN lately because they are low ratings Iowa has it all going! Remember, i WON Iowa! 
+Tweet:
+What i am saying is that we never should have been in Iraq in the first place. Oil is under $50. Now is the time to start advancing the K.. 
+Tweet:
+The People of Tennessee are very worried about Luther Strange being VP. He is just a guy who knows nothing about me & is highly overrated. Funny to watch! 
+Tweet:
+Just returned to Bedminster, NJ from Camp David. Great place! 
+Tweet:
+Why are we letting the three girls, who left the U.S. to join ISIS, to protect their nations, make them count on Ebola. No way! 
+Tweet:
+How does Ben Carson survive this problem – totally biased and dishonest people like Ben Smith. No way! 
+Tweet:
+Tiger Woods showed great class in politics but just doesn't have the “guts” for the country - and that’s why. Tiger is a total puppet for Republicans! 
+Tweet:
+The Establishment and special interests are absolutely killing our country. We must put #americafirst. 
+Tweet:
+Being in Detroit today was wonderful. Quick stop in Ohio to meet with some of the world’s most talented car industry workers. Just got back home! 
+
+
+###############################################################################
+Peregrine Cluster
+Job 6367270 for user 's2912279'
+Finished at: Thu Jun 20 22:54:45 CEST 2019
+
+Job details:
+============
+
+Name                : MTGA
+User                : s2912279
+Partition           : gpu
+Nodes               : pg-gpu12
+Cores               : 12
+State               : COMPLETED
+Submit              : 2019-06-20T22:38:25
+Start               : 2019-06-20T22:42:26
+End                 : 2019-06-20T22:54:45
+Reserved walltime   : 01:00:00
+Used walltime       : 00:12:19
+Used CPU time       : 00:12:46 (efficiency:  8.64%)
+% User (Computation): 63.48%
+% System (I/O)      : 36.52%
+Mem reserved        : 10G/node
+Max Mem used        : 2.64G (pg-gpu12)
+Max Disk Write      : 61.44K (pg-gpu12)
+Max Disk Read       : 3.19M (pg-gpu12)
+
+
+Acknowledgements:
+=================
+
+Please see this page if you want to acknowledge Peregrine in your publications:
+
+https://redmine.hpc.rug.nl/redmine/projects/peregrine/wiki/ScientificOutput
+
+################################################################################

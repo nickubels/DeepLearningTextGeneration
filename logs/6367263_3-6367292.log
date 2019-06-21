@@ -1,0 +1,85 @@
+2019-06-20 22:54:56 INFO     Namespace(architecture='AWD_LSTM', data='./tweets/real_trump_2011.csv', epochs='10', job_id='6367292', model_name='finetune_trump.pkl', model_path='/home/s2912279/DeepLearningTextGeneration/model/', n_tweets=10, n_words=300, output_path='./output', train=True, use_pretrained='False')
+2019-06-20 22:54:56 INFO     Start loading data
+2019-06-20 22:54:56 INFO     The number of tweets: 24847
+22362
+2236
+249
+2019-06-20 22:54:56 INFO     Start training the model
+2019-06-20 22:55:00 INFO     Using a pretrained_model to finetune: False
+epoch     train_loss  valid_loss  accuracy  time    
+0         4.294106    3.863323    0.306488  00:14     
+epoch     train_loss  valid_loss  accuracy  time    
+0         3.762939    3.606603    0.338170  00:17     
+epoch     train_loss  valid_loss  accuracy  time    
+0         3.563545    3.465943    0.353705  00:17     
+1         3.379905    3.384929    0.364583  00:17     
+2         3.222947    3.331299    0.369554  00:17     
+3         3.089473    3.299544    0.373929  00:16     
+4         2.968537    3.279578    0.376696  00:17     
+5         2.856529    3.265895    0.378869  00:17     
+6         2.756572    3.260492    0.380551  00:17     
+7         2.657664    3.266468    0.380625  00:17     
+8         2.567474    3.274566    0.381205  00:17     
+9         2.483523    3.295022    0.379762  00:17     
+2019-06-20 22:58:26 INFO     Start testing
+2019-06-20 22:58:26 INFO     Test loss: 3.269981
+2019-06-20 22:58:26 INFO     Test accuracy: tensor(0.3845)
+2019-06-20 22:58:27 INFO     Generating tweets
+Tweet:
+“Trump Home Teacher” by Jeffrey Lord @marklevinshow 
+Tweet:
+Wow, a review of Monday’s Sunday’s All - Star @apprenticenbc features the return of @apprenticenbc. Final shows are terrific. It is great! 
+Tweet:
+The Washington Post is starting to write stories about " The Nuclear Deal " - a total waste of time - it was just a lie & never will. The Fake News Media constantly goes the standard of reporting classified information... 
+Tweet:
+The The Art of the Deal. The Art of the Deal.... No way, Washington, The Wall, Energy, the Economy and far more money has been wasted on the Wall! 
+Tweet:
+Thank you Atlanta, Georgia! #americafirst #makeamericagreatagain 
+Tweet:
+The wonderful Ronald Reagan visited his family today to see our great First Lady - and to thank him for what will happen! 
+Tweet:
+Marco Rubio, who sometimes wins the debate, is a negative politician for Senator Marco Rubio. The most overrated politician in Florida. 
+Tweet:
+This is the most important election of any political event in the history of our party! 
+Tweet:
+Thank you Washington, D.C. and Iowa. #americafirst 
+Tweet:
+Great review of Fake News Media by Maggie Haberman, and the news media! 
+
+
+###############################################################################
+Peregrine Cluster
+Job 6367292 for user 's2912279'
+Finished at: Thu Jun 20 22:58:29 CEST 2019
+
+Job details:
+============
+
+Name                : MTGA
+User                : s2912279
+Partition           : gpu
+Nodes               : pg-gpu12
+Cores               : 12
+State               : COMPLETED
+Submit              : 2019-06-20T22:38:25
+Start               : 2019-06-20T22:54:46
+End                 : 2019-06-20T22:58:29
+Reserved walltime   : 01:00:00
+Used walltime       : 00:03:43
+Used CPU time       : 00:04:07 (efficiency:  9.23%)
+% User (Computation): 65.75%
+% System (I/O)      : 34.25%
+Mem reserved        : 10G/node
+Max Mem used        : 2.64G (pg-gpu12)
+Max Disk Write      : 61.44K (pg-gpu12)
+Max Disk Read       : 3.19M (pg-gpu12)
+
+
+Acknowledgements:
+=================
+
+Please see this page if you want to acknowledge Peregrine in your publications:
+
+https://redmine.hpc.rug.nl/redmine/projects/peregrine/wiki/ScientificOutput
+
+################################################################################

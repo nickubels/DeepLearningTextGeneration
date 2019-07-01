@@ -11,24 +11,27 @@ summary(data$SC0)
 sd(data$SC0)
 
 # Get counts
-generated_correct <- 0
-generated_incorrect <- 0
-generated_incorrect <- generated_incorrect + sum(data$Q1 == 1)
-generated_correct <- generated_correct + sum(data$Q1 == 2)
-generated_incorrect <- generated_incorrect + sum(data$Q2 == 1)
-generated_correct <- generated_correct + sum(data$Q2 == 2)
-generated_incorrect <- generated_incorrect + sum(data$Q3 == 1)
-generated_correct <- generated_correct + sum(data$Q3 == 2)
-generated_incorrect <- generated_incorrect + sum(data$Q4 == 1)
-generated_correct <- generated_correct + sum(data$Q4 == 2)
-generated_incorrect <- generated_incorrect + sum(data$Q5 == 1)
-generated_correct <- generated_correct + sum(data$Q5 == 2)
-generated_incorrect <- generated_incorrect + sum(data$Q6 == 1)
-generated_correct <- generated_correct + sum(data$Q6 == 2)
-generated_incorrect <- generated_incorrect + sum(data$Q7 == 1)
-generated_correct <- generated_correct + sum(data$Q7 == 2)
-generated_incorrect <- generated_incorrect + sum(data$Q8 == 1)
-generated_correct <- generated_correct + sum(data$Q8 == 2)
+generated_pre_correct <- 0
+generated_pre_incorrect <- 0
+generated_pre_incorrect <- generated_pre_incorrect + sum(data$Q1 == 1)
+generated_pre_correct <- generated_pre_correct + sum(data$Q1 == 2)
+generated_pre_incorrect <- generated_pre_incorrect + sum(data$Q2 == 1)
+generated_pre_correct <- generated_pre_correct + sum(data$Q2 == 2)
+generated_pre_incorrect <- generated_pre_incorrect + sum(data$Q3 == 1)
+generated_pre_correct <- generated_pre_correct + sum(data$Q3 == 2)
+generated_pre_incorrect <- generated_pre_incorrect + sum(data$Q4 == 1)
+generated_pre_correct <- generated_pre_correct + sum(data$Q4 == 2)
+
+generated_non_correct <- 0
+generated_non_incorrect <- 0
+generated_non_incorrect <- generated_non_incorrect + sum(data$Q5 == 1)
+generated_non_correct <- generated_non_correct + sum(data$Q5 == 2)
+generated_non_incorrect <- generated_non_incorrect + sum(data$Q6 == 1)
+generated_non_correct <- generated_non_correct + sum(data$Q6 == 2)
+generated_non_incorrect <- generated_non_incorrect + sum(data$Q7 == 1)
+generated_non_correct <- generated_non_correct + sum(data$Q7 == 2)
+generated_non_incorrect <- generated_non_incorrect + sum(data$Q8 == 1)
+generated_non_correct <- generated_non_correct + sum(data$Q8 == 2)
 
 real_correct <- 0
 real_incorrect <- 0
@@ -44,7 +47,11 @@ real_correct <- real_correct + sum(data$Q12 == 1)
 # Make table
 trump <- c(real_correct, real_incorrect)
 generated <- c(generated_incorrect, generated_correct)
-tbl <- matrix(c(real_correct, real_incorrect, generated_incorrect, generated_correct),nrow=2,byrow=TRUE)
+tbl <- matrix(c(real_correct, real_incorrect, generated_pre_incorrect+generated_non_incorrect, generated_pre_correct+generated_non_correct),nrow=2,byrow=TRUE)
+tbl2 <- matrix(c(real_correct/944,
+                 real_incorrect/944,
+                 generated_pre_incorrect+generated_non_incorrect/1888,
+                 generated_pre_correct+generated_non_correct/1888),nrow=2,byrow=TRUE)
 
 # chisq
 chisq.test(tbl)

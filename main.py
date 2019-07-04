@@ -86,16 +86,19 @@ class TextGeneration:
             data = []
             for row in reader:
                 if len(row[0]) > 1:
+                    # Check if tweet does not start with quote
                     if not (row[0].startswith('"') or ord(row[0][0]) == 820):
                         data.append(row[0])
             logger.info('The number of tweets: {}'.format(len(data)))
 
+        # Split datset into set for training and for validation and testing
         train_data, validation_test_data = train_test_split(
             list(data),
             test_size=0.1,
             random_state=1
         )
 
+        # Split validation and testing set into two sets
         validation_data, test_data = train_test_split(
             list(validation_test_data),
             test_size=0.1,
@@ -112,6 +115,8 @@ class TextGeneration:
 
     def train(self, epochs=1, batch_size=32):
         """Train language model, uses two one cycle processes on first iteration"""
+
+        # Setup the databunch
         self.data_lm = TextLMDataBunch.from_df(
             path='data',
             train_df=self.train_df,
@@ -121,8 +126,11 @@ class TextGeneration:
             bs=batch_size
         )
 
+        # Check if it has to initialise the model
         if not self.trained:
             logger.info("Using a pretrained_model to finetune: " + str(self.args.use_pretrained))
+
+            # Select the correct architecture
             if self.args.architecture.lower() == 'awd_lstm':
                 self.model = language_model_learner(self.data_lm, arch=AWD_LSTM,
                                                     pretrained=self.args.use_pretrained, drop_mult=self.dropout)
@@ -137,9 +145,12 @@ class TextGeneration:
             self.model.fit_one_cycle(1, 1e-3)
 
             self.trained = True
+
+        # Train
         self.model.fit(epochs, lr=1e-3, wd=1e-7)
 
     def test(self):
+        """Validates the model on the test dataset"""
         test_metric = self.model.validate(self.data_lm.test_dl)
         logger.info("Test loss: " + str(test_metric[0]))
         logger.info("Test accuracy: " + str(test_metric[1]))
@@ -147,10 +158,16 @@ class TextGeneration:
     @staticmethod
     def prettify_tweet(tweet):
         """Prettifies tweet by removing spaces around some tokens, mostly interpunction"""
+
+        # Set up character sets
         no_leading_space = ['?', '!', ',', '.', '\'', '’', '”', 'n\'t', 'n’t', '%', ')', ':']
         no_trailing_space = ['$', '#', '“', '(']
+
+        # Remove space in front of characters
         for char in no_leading_space:
             tweet = tweet.replace(' ' + char, char)
+
+        # Remove space after characters
         for char in no_trailing_space:
             tweet = tweet.replace(char + ' ', char)
         return tweet
@@ -159,9 +176,16 @@ class TextGeneration:
         """Generates new tweets with the language model"""
         logger.info("Generating tweets")
         generated_tweets = []
+
+        # Generate text until we have enough tweets
         while len(generated_tweets) < count:
+            # Generate text
             raw_generated = self.model.predict("xxbos", n_words=max_words, temperature=0.8)
+
+            # Split on begin of sentence token
             raw_tweets = raw_generated.split("xxbos ")[1:]
+
+            # Iterate through tweets, prettify the tweets and save the tweets
             for tweet in raw_tweets[:-1]:  # Skip last xxbos as it is 99% chance it is an incomplete tweet
                 tweet = self.prettify_tweet(tweet)
                 if tweet and len(tweet) <= 280:

@@ -1,4 +1,4 @@
-# DeepLearningTextGeneration
+# Make tweets great again
 
 In this project for the Deep Learning course (WMAI18002) at University of Groningen we generated fake Donald Trump tweets using an [AWD LSTM](https://arxiv.org/abs/1708.02182) and a [Transformer](https://arxiv.org/abs/1706.03762). 
 

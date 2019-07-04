@@ -45,8 +45,6 @@ real_incorrect <- real_incorrect + sum(data$Q12 == 2)
 real_correct <- real_correct + sum(data$Q12 == 1)
 
 # Make table
-trump <- c(real_correct, real_incorrect)
-generated <- c(generated_incorrect, generated_correct)
 tbl <- matrix(c(real_correct, real_incorrect, generated_pre_incorrect+generated_non_incorrect, generated_pre_correct+generated_non_correct),nrow=2,byrow=TRUE)
 tbl2 <- matrix(c(real_correct/944,
                  real_incorrect/944,
@@ -55,3 +53,9 @@ tbl2 <- matrix(c(real_correct/944,
 
 # chisq
 chisq.test(tbl)
+
+tbl_pre <- matrix(c(real_correct, real_incorrect, generated_pre_incorrect, generated_pre_correct),nrow=2,byrow=TRUE)
+tbl_non <- matrix(c(real_correct, real_incorrect, generated_non_incorrect, generated_non_correct),nrow=2,byrow=TRUE)
+
+chisq.test(tbl_pre)
+chisq.test(tbl_non)

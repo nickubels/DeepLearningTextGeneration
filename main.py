@@ -14,7 +14,6 @@ logging.basicConfig(
     level=logging.DEBUG,
     datefmt='%Y-%m-%d %H:%M:%S')
 
-
 def str2bool(v):
     """Convert a string to a bool, this makes sure argument parsing goes right,
      based on https://stackoverflow.com/questions/15008758/parsing-boolean-values-with-argparse"""
@@ -57,6 +56,10 @@ def get_args():
 
 
 class TextGeneration:
+    """
+    Class for text generation deep learning networks, training, generation and evaluation.
+    Partly based on https://github.com/granilace/TweetGenerator
+    """
     def __init__(self):
         # Here we init stuff
         self.args = get_args()

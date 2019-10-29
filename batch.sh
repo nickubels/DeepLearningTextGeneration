@@ -6,8 +6,6 @@
 #SBATCH --gres=gpu:v100:1
 #SBATCH --job-name=MTGA
 #SBATCH --mem=10G
-#SBATCH --mail-type=FAIL,ARRAY_TASKS
-#SBATCH --mail-user=n.s.ubels@student.rug.nl
 #SBATCH --output=logs/%A_%a-%j.log
 #SBATCH --array=1-8%1
 

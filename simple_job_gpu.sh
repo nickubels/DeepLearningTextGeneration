@@ -6,8 +6,6 @@
 #SBATCH --gres=gpu:v100:1
 #SBATCH --job-name=MTGA
 #SBATCH --mem=10G
-#SBATCH --mail-type=BEGIN,END,FAIL
-#SBATCH --mail-user=n.s.ubels@student.rug.nl
 #SBATCH --output=logs/job-%j.log
 
 module load Python/3.6.4-foss-2018a
